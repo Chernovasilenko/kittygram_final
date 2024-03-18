@@ -14,7 +14,7 @@ services:
       - pg_data_production:/var/lib/postgresql/data
 
   backend:
-    image: randlex/kittygram_backend
+    image: ${DOCKER_USERNAME}/kittygram_backend
     env_file: .env
     depends_on:
       - db
@@ -23,7 +23,7 @@ services:
       - media:/media
 
   frontend:
-    image: randlex/kittygram_frontend
+    image: ${DOCKER_USERNAME}/kittygram_frontend
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
@@ -33,7 +33,7 @@ services:
 
 
   gateway:
-    image: randlex/kittygram_gateway
+    image: ${DOCKER_USERNAME}/kittygram_gateway
     env_file: .env
     depends_on:
       - frontend
