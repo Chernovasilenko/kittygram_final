@@ -20,7 +20,7 @@ services:
       - db
     volumes:
       - static_volume:/backend_static
-      - media:/app/media
+      - media:/media
 
   frontend:
     image: randlex/kittygram_frontend
@@ -39,6 +39,6 @@ services:
       - frontend
     volumes:
       - static_volume:/static/
-      - media:/app/media
+      - media:/media
     ports:
       - 9000:80
