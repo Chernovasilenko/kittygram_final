@@ -18,6 +18,7 @@ services:
       - db
     volumes:
       - static:/backend_static
+      - media:/media
   frontend:
     env_file: .env
     build: ./frontend/
