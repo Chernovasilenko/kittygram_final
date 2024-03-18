@@ -95,8 +95,50 @@ ADMIN_PASSWORD=<password>
 Перенести на удаленный сервер файлы .env и docker-compose.production.yml
 
 На сервере перейти в директорию kittygram:
-
+```bash
 cd kittygram
+```
+
+Выполнить сборку приложений:
+```bash
+sudo docker compose -f docker-compose.production.yml up -d
+```
+
+Выполнить миграции:
+```bash
+sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
+```
+
+Собрать статику:
+```bash
+sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
+```
+
+Скопировать статику:
+
+```bash
+sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. web/backend_static/static
+```
+
+Настроить шлюз для перенаправления запросов на `9000` порт, который слушает контейнер `kittygram_gateway`:
+
+```bash
+sudo nano /etc/nginx/sites-enabled/default
+```
+
+После изменений перезапустить nginx:
+```bash
+sudo systemctl restart nginx.service
+```
+
+
+
+
+
+
+
+
+
 
 ### Как запустить проект:
 
@@ -149,3 +191,15 @@ python3 manage.py migrate
 ```
 python3 manage.py runserver
 ```
+
+# CI/CD
+
+Для использования CI/CD через GitHub Actions необходимо добавить следующие значения в Actions secrets:
+- `DOCKER_USERNAME`
+- `DOCKER_PASSWORD`
+- `HOST`
+- `USER`
+- `SSH_KEY`
+- `SSH_PASSPHRASE`
+- `TELEGRAM_TO`
+- `TELEGRAM_TOKEN`
