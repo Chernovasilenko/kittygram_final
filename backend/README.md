@@ -22,6 +22,7 @@ git clone git@github.com:Chernovasilenko/kittygram_final
 SECRET_KEY=<secret_key>
 DEBUG=False
 ALLOWED_HOSTS=<host_ip_address>;127.0.0.1;localhost;<domain.name>
+USE_SQLITE=True
 
 # DB
 POSTGRES_USER=<user>
@@ -79,8 +80,10 @@ sudo docker push <username>/kittygram_gateway
 SECRET_KEY=<secret_key>
 DEBUG=False
 ALLOWED_HOSTS=<host_ip_address>;127.0.0.1;localhost;<domain.name>
+USE_SQLITE=False
 
 # DB
+
 POSTGRES_USER=<user>
 POSTGRES_PASSWORD=<password>
 POSTGRES_DB=<db name>
