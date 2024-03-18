@@ -92,11 +92,6 @@ DOCKER_USERNAME=<docker_username>
 ```
 Перенести на сервер файлы .env и docker-compose.production.yml
 
-На сервере перейти в директорию kittygram:
-```bash
-cd kittygram
-```
-
 Выполнить сборку приложений:
 ```bash
 sudo docker compose -f docker-compose.production.yml up -d
@@ -133,7 +128,7 @@ location / {
 
 После изменений перезапустить nginx:
 ```bash
-sudo systemctl restart nginx.service
+sudo systemctl reload nginx
 ```
 
 # CI/CD
