@@ -1,5 +1,6 @@
 # Kittygram
 # Описание
+Для запуска проекта необходимо установить [Docker](https://docs.docker.com/engine/install/)
 # Технологии
 - Python 3.9
 - PostgreSQL
@@ -9,8 +10,6 @@
 - Docker
 - Gunicorn
 # Локальный запуск
-Для запуска проекта необходимо установить [Docker](https://docs.docker.com/engine/install/)
-
 Клонировать репозиторий:
 
 ```bash
@@ -18,7 +17,7 @@ git clone git@github.com:Chernovasilenko/kittygram_final
 ```
 Создать в корневой директории .env файл со следующим содержанием:
 
-```bash
+```
 # Django settings
 SECRET_KEY=<secret_key>
 DEBUG=False
@@ -37,17 +36,67 @@ ADMIN_EMAIL=<admin@mail.com>
 ADMIN_PASSWORD=<password>
 ```
 
-# Запуск через Docker:
+Запуск:
 
 ```bash
 sudo docker compose -f docker-compose.dev.yml up
 ```
 После  запуска проект доступен на локальном IP 127.0.0.1:9000
 
+# Запуск на сервере
+Клонировать репозиторий:
 
+```bash
+git clone git@github.com:Chernovasilenko/kittygram_final
+```
 
+Перейти в каталог проекта:
 
+```bash
+cd kittygram
+```
 
+Создать docker images образы:
+
+```bash
+sudo docker build -t <username>/kittygram_backend backend/
+sudo docker build -t <username>/kittygram_frontend frontend/
+sudo docker build -t <username>/kittygram_gateway nginx/
+```
+
+Загрузить образы на Docker Hub:
+
+```bash
+sudo docker push <username>/kittygram_backend
+sudo docker push <username>/kittygram_frontend
+sudo docker push <username>/kittygram_gateway
+```
+
+Создать .env файл со следующим содержанием:
+
+```
+# Django settings
+SECRET_KEY=<secret_key>
+DEBUG=False
+ALLOWED_HOSTS=<host_ip_address>;127.0.0.1;localhost;<domain.name>
+
+# DB
+POSTGRES_USER=<user>
+POSTGRES_PASSWORD=<password>
+POSTGRES_DB=<db name>
+DB_HOST=db
+DB_PORT=5432
+
+# Superuser data
+ADMIN_USERNAME=<usename>
+ADMIN_EMAIL=<admin@mail.com>
+ADMIN_PASSWORD=<password>
+```
+Перенести на удаленный сервер файлы .env и docker-compose.production.yml
+
+На сервере перейти в директорию kittygram:
+
+cd kittygram
 
 ### Как запустить проект:
 
