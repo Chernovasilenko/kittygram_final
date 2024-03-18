@@ -9,16 +9,14 @@
 - Docker
 - Gunicorn
 # Локальный запуск
-Клонировать репозиторий и перейти в него в командной строке:
+Для запуска проекта необходимо установить [Docker](https://docs.docker.com/engine/install/)
+
+Клонировать репозиторий:
 
 ```bash
-git clone git@github.com:Chernovasilenko/api_yamdb
+git clone git@github.com:Chernovasilenko/kittygram_final
 ```
-
-```bash
-cd api_yamdb
-```
-Создать .env файл со следующим содержанием:
+Создать в корневой директории .env файл со следующим содержанием:
 
 ```bash
 # Django settings
